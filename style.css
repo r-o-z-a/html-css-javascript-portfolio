@@ -1,0 +1,122 @@
+*, ::after, ::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: frightmare, sans-serif;
+    font-size: 62.5%;
+}
+
+body{
+    background: rgba(0,0,0,0.91);
+    background-image: url(images/skull-wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+nav{
+    height: 6rem;
+    background: rgba(36, 36, 36, 0.6);
+}
+
+li{
+    font-size: 3rem;
+    display: inline-block;
+    padding: 1rem;
+    color: rgba(244, 233, 233, 0.434);
+    letter-spacing: 1px;
+}
+
+main{
+    background-color: black;
+    width: 60rem;
+    height: 50rem;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 9px;
+    box-shadow: 1rem black;
+}
+
+button{
+    margin-top: 0;
+    margin-left: 3%;
+    padding: 0.2rem  4.5rem;
+    background-color: red;
+    border: black;
+    font-family: frightmare, sans-serif;
+    letter-spacing: 0.1rem;
+    font-weight: 1000;
+    font-size: 2.2rem;
+    border-radius: 6px;
+}
+
+button a{
+    text-decoration-line: none;
+    color: black
+}
+
+button:hover{
+    background-color: rgb(201, 115, 115);
+}
+
+button:active{
+    background-color: rgba(66, 64, 64, 0.358);
+    box-shadow: 3px grey;
+    font-size: 2.5rem;
+}
+
+button a:active{
+    color: rgb(237, 233, 228);
+}
+
+li a{
+    text-decoration-line: none;
+    color: rgba(244, 233, 233, 0.434);
+}
+
+;i a:active{
+    color: red;
+    font-size: 3.5rem;
+}
+
+img{
+    width: 40rem;
+    height: 40rem;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+}
+
+@media (max-width: 450px){
+    li{
+        font-size: 2rem;
+    }
+
+    main{
+        width: 30rem;
+        height: 40rem;
+        right: 5%;
+    }
+
+    img{
+        width:30rem;
+        height: 30rem;
+    }
+
+    button{
+        font-size: 1.5rem;
+        padding: 0.1rem 2.5rem;
+    }
+}
+
+

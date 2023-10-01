@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/frightmare" rel="stylesheet">
+    <link rel="stylesheet" href="calculatorstyle.css" type="text/css">
+    <link rel="shortcut icon" href="transparent.ico" type="image/x-icon">
+    <title>Skeleton Project</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html" target="_self">HOME</a></li>
+                <li><a href="game.html" target="_self">GAME</a></li>
+                <li><a href="randomquote.html" target="_self">RANDOM</a></li>
+                <li><a href="calculator.html" target="_self">CALCULATOR</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <input type="text"  id="display" readonly>
+            <div class="buttons">
+                <button class="operator" id="clear" onclick="display.value = ''">C</button>
+                <button class="operator" id="delete" onclick="display.value = display.value.toString().slice(0,-1)">DEL</button>
+                <button class="symbol operator" id="percent" value="%" >%</button>
+                <button class="number" id="p" onclick="display.value += '('" value="(">(</button>
+                <button class="number" id="p" onclick="display.value += ')'" value=")">)</button>
+                <button class="symbol operator" value="÷">÷</button>
+
+                <button class="operator number" value="π">π</button>
+                <button class="number operator" value="√(">√</button>
+                <button class="number" value="7" onclick="display.value += '7'">7</button>
+                <button class="number" value="8" onclick="display.value += '8'">8</button>
+                <button class="number" value="9" onclick="display.value += '9'">9</button>
+                <button class="symbol operator" value="×">×</button>
+
+                <button class="number operator" value="sin(">sin</button>
+                <button class="number operator" value="cos(">cos</button>
+                <button class="number" value="4" onclick="display.value += '4'">4</button>
+                <button class="number" value="5" onclick="display.value += '5'">5</button>
+                <button class="number" value="6" onclick="display.value += '6'">6</button>
+                <button class="symbol operator" value="+">+</button>
+
+                <button class="number operator" value="tan(">tan</button>
+                <button class="number operator" value="log(">log</button>
+                <button class="number" value="1" onclick="display.value += '1'">1</button>
+                <button class="number" value="2" onclick="display.value += '2'">2</button>
+                <button class="number" value="3" onclick="display.value += '3'">3</button>
+                <button class="operator" value="-">-</button>
+
+                <button class="number operator" value="ln(">ln</button>
+                <button class="number operator" value="²">x²</button>
+                <button class="number" value="00" onclick="display.value += '00'">00</button>
+                <button class="number" value="0" onclick="display.value += '0'">0</button>
+                <button class="number" value="." onclick="display.value += '.'" id="dot">.</button>
+                <button class="number operator" value="^">^</button>
+                
+                <button class="operator" id="eval">=</button>
+
+            </div>
+        </div>
+    </main>
+    <script src="calculator.js"></script>
+</body>
+</html>

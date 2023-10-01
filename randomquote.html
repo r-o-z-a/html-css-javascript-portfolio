@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/frightmare" rel="stylesheet">
+    <style>
+         @import url('https://fonts.cdnfonts.com/css/creepy-sunday');
+    *{
+	    margin:0;
+	    padding: 0;
+	    box-sizing: border-box;
+	}
+	body{
+        background-image: url(images/skull-wallpaper.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+	}
+
+    html{
+        font-family: frightmare, sans-serif;
+        font-size: 62.5%;
+    }
+
+    nav{
+        height: 6rem;
+        background: rgba(36, 36, 36, 0.6);
+    }
+
+    li{
+        font-size: 3rem;
+        display: inline-block;
+        padding: 1rem;
+        letter-spacing: 1px;
+    }
+
+    a{
+        text-decoration-line: none;
+        color: rgba(205, 205, 205, 0.615);
+    }
+
+    a:active{
+        color: rgb(252, 7, 7);
+        font-size: 3.5rem;
+    }
+	
+	.quote-box{
+	width: 700px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 40px;
+	border-radius: 10px;
+	text-align: center;
+	/* box-shadow: grey 10px 10px 10px 4px; */
+	background: rgb(0, 0, 0);
+	overflow: auto;
+	resize: both;
+    color: white;
+    font-family: 'Creepy Sunday', sans-serif;
+    letter-spacing: 2px;
+    font-size: 3rem;
+	}
+	
+	.quote-box h1{
+	font-size: 32px;
+	margin-bottom: 20px;
+	position: relative;
+	}
+	
+	.quote-box h1::after{
+	content: '';
+	width: 5rem;
+	height: 2px;
+	border-radius: 10px;
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgb(255, 0, 0);
+	}
+	.quote-box blockquote{
+	font-size: 26px;
+	min-height: 110px;
+	}
+	.quote-box blockquote::before, .quote-box blockquote::after{
+	content: '"';
+	}
+	
+	.author{
+	margin-top: 10px;
+	float: right;
+	position: relative;
+    margin-bottom: 1rem;
+    font-size: 2rem !important; 
+	}
+	
+	.author::before{
+	content: '';
+	width: 20px;
+	height: 2px;
+	position: absolute;
+	background: rgb(255, 0, 0);
+	top: 50%;
+	left: -30px;
+	}
+	
+	.buttons{
+	margin: 0;
+	width: 100%;
+	}
+	
+	.buttons .features{
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	}
+	
+	.features ul{
+	display: flex;
+	gap: 1rem;
+	}
+	
+	.features ul li{
+	    list-style: none;
+	    color: rgba(236, 236, 236, 0.849);
+	}
+
+    .features ul li:hover{
+	    background: rgba(205, 205, 205, 0.615);
+        border-radius: 50%;
+	}
+	
+	.features button{
+	    background: rgba(255, 0, 0, 0.9);
+	    border-radius: 36px;
+	    color: rgb(0, 0, 0);
+	    border: none;
+	    outline: none;
+	    height: 40px;
+	    cursor: pointer;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+	    padding:  0 20px;
+        font-family: 'Creepy Sunday', sans-serif;
+	}
+
+    .features button:hover{
+        color: white;
+    }
+
+    .line {
+        border: none;
+        border-top: 2px solid rgb(0, 0, 0); /* Color of the line */
+        width: 100%; /* Full width line */
+        margin-top: 20px;
+    }
+
+    #twitter{
+        color: red;
+    }
+
+    #sound{
+        font-size: 27px;
+    }
+
+    button:active{
+        color:black !important;
+        background-color: rgb(170, 179, 179);
+        width: 120px;
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+    </style>
+    <title>Random Quote Generator</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html" target="_self">HOME</a></li>
+                <li><a href="game.html" target="_self">GAME</a></li>
+                <li><a href="random.html" target="_self">RANDOM</a></li>
+                <li><a href="calculator.html" target="_self">CALCULATOR</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class='quote-box'>
+        <div class='quote'>
+            <h1>Quote Of The Day</h1>
+            <blockquote id="quote">Loading...</blockquote>
+            <div class='author'>
+                <span id='author'>Loading...</span>
+            </div>
+            <hr class="line">
+        </div>
+        <div class='buttons'>
+            <div class='features'>
+                <ul>
+                    <li id="copy"><i class="far fa-copy"></i></li>
+                    <li id="sound"><i class="fas fa-volume-high"></i></li>
+                    <li id="twitter"><i class="fab fa-twitter twitter"></i></li>
+                </ul>
+                <button onclick="getQuote()">New Quote</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const quote = document.getElementById('quote');
+        const author = document.getElementById("author");
+        const api_url = "https://api.quotable.io/random";
+        const sound = document.getElementById('sound');
+        const copy = document.getElementById('copy');
+        const twitter = document.getElementById('twitter');
+
+        async function getQuote() {
+            try {
+                const response = await fetch(api_url);
+                const data = await response.json();
+                console.log(data);
+                quote.innerHTML = data.content;
+                author.innerHTML = data.author;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+    sound.addEventListener('click', () => {
+        let utter = new SpeechSynthesisUtterance(`${quote.innerHTML} by ${author.innerHTML}`);
+        window.speechSynthesis.speak(utter);
+    });
+
+    copy.addEventListener('click', () => {
+        navigator.clipboard.writeText(`${quote.innerHTML} by ${author.innerHTML}`)
+            .then(() => {
+                alert("Text copied to clipboard!");
+            })
+            .catch((error) => {
+                console.error('Could not copy text: ', error);
+            });
+    });
+
+    twitter.addEventListener('click', () => {
+        const text = encodeURIComponent(`${quote.innerHTML} by ${author.innerHTML}`);
+        const tweetUrl = `https://twitter.com/intent/tweet?text=${text}`;
+        window.open(tweetUrl, 'tweet window', 'width=600,height=500');
+    });
+        getQuote();
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type="text/css" src="styles.css" rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/frightmare" rel="stylesheet">
+	<style>
+        @import url('https://fonts.cdnfonts.com/css/creepy-sunday');
+
+	*{
+	margin:0;
+	padding: 0;
+	box-sizing: border-box;
+	}
+	body{
+        background-image: url(images/skull-wallpaper.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+	}
+
+    html{
+        font-family: frightmare, sans-serif;
+        font-size: 62.5%;
+    }
+
+    nav{
+        height: 6rem;
+        background: rgba(36, 36, 36, 0.6);
+    }
+
+    li{
+        font-size: 3rem;
+        display: inline-block;
+        padding: 1rem;
+        letter-spacing: 1px;
+    }
+
+    a{
+        text-decoration-line: none;
+        color: rgba(205, 205, 205, 0.615);
+    }
+
+    a:active{
+        color: rgb(252, 7, 7);
+        font-size: 3.5rem;
+        }
+	
+	.quote-box{
+	    width: 700px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    padding: 40px;
+	    border-radius: 10px;
+	    text-align: center;
+	    box-shadow: 1rem black;
+	    background: rgb(0, 0, 0);
+	    overflow: auto;
+	    resize: both;
+        color: rgb(210, 203, 203);
+        letter-spacing: 2px;
+        font-family: 'Creepy Sunday', sans-serif;
+	}
+	
+	.quote-box h1{
+	    font-size: 32px;
+	    margin-bottom: 20px;
+	    position: relative;
+	}
+	  
+    .quote-box h1::after{
+	    content: '';
+	    width: 75px;
+	    height: 3px;
+	    border-radius: 10px;
+	    position: absolute;
+	    bottom: -10px;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    background: rgb(255, 0, 0);
+	}
+
+	.quote-box blockquote{ 
+	    font-size: 26px;
+	    min-height: 110px;
+	}
+	.quote-box blockquote::before, .quote-box blockquote::after{
+	content: '"';
+	}
+	
+	#author{
+	    display: block;
+	    margin-top: 10px;
+	    float: right;
+	    position: relative;
+        font-size: 2rem !important; 
+	}
+	
+	#author::before{
+	content: '';
+	width: 20px;
+	height: 2px;
+	position: absolute;
+	background: rgb(255, 0, 0);
+	top: 50%;
+	left: -30px;
+	}
+	
+	.buttons{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 50px;
+	}
+	
+	button{
+	background: rgba(255, 0, 0, 0.9);
+	border-radius: 36px;
+	color: rgb(24, 22, 22);
+    border: none;
+	width: 100px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 5px;
+	cursor: pointer;
+    font-weight: 900;
+    font-size: 2rem;
+    font-family: 'Creepy Sunday', sans-serif;
+    letter-spacing: 1px;;
+	}
+
+    button:active{
+        background-color: rgb(170, 179, 179);
+        width: 120px;
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+	</style>
+	<title>random quote</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html" target="_self">HOME</a></li>
+                <li><a href="game.html" target="_self">GAME</a></li>
+                <li><a href="random.html" target="_self">RANDOM</a></li>
+                <li><a href="calculator.html" target="_self">CALCULATOR</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class='quote-box'>
+        <h1>Quote Of The Day</h1>
+        <blockquote id="quote">Loading...</blockquote>
+        <span id='author'>Loading...</span>
+        <div class='buttons'>
+            <button id='new' onclick="getQuote()">New Quote</button>
+            <button id='tweet' onclick="tweet()">Tweet</button>
+        </div>
+        <div class="tooltip">note :
+            <span class="text">you can resize the quote box from the bottom right corner</span>
+        </div>
+    </div>
+    <script>
+        const quote = document.getElementById('quote'); // Fixed typo here
+        const author = document.getElementById("author");
+        const api_url= "https://api.quotable.io/random";
+        
+        async function getQuote(){
+            try {
+                const response = await fetch(api_url); // Use the predefined api_url
+                const data = await response.json();
+                console.log(data);
+                quote.innerHTML = data.content; // Fixed typo here
+                author.innerHTML = data.author; // Fixed typo here
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
+        function tweet(){
+            const text = encodeURIComponent(quote.innerHTML + " by " + author.innerHTML);
+            window.open("https://twitter.com/intent/tweet?text=" + text,
+            "tweet window", "width=600, height=500"); // Fixed the window dimensions
+			
+        }
+
+        
+        getQuote(); // Call the function to get the initial quote
+    </script>
+</body>
+</html>
