@@ -1,4 +1,4 @@
-# Project Portfolio
+# HTML/CSS/JS Portfolio
 
 ## 1. Scientific Calculator
 
